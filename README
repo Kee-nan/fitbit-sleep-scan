@@ -1,0 +1,50 @@
+This script helps researchers authenticate with a Fitbit account and retrieve sleep data. The data is saved as a CSV file with a date-stamped filename for easy organization.
+
+Prerequisites
+Node.js: Ensure you have Node.js installed (version 18 or higher is recommended).
+Environment Variables: You need to set up environment variables for authentication.
+Fitbit Developer Account: Obtain a Fitbit OAuth2 client ID and secret.
+
+Setup Instructions
+
+Clone the Repository:
+git clone https://github.com/yourusername/fitbit-data-retrieval.git
+cd fitbit-data-retrieval
+
+Install Dependencies:
+
+Install the required Node.js packages by running:
+
+npm install
+
+Configure Environment Variables:
+Create a .env file in the root directory of the project and add the following lines, replacing the placeholders with your actual values:
+CLIENT_ID=your_fitbit_client_id
+CLIENT_SECRET=your_fitbit_client_secret
+REDIRECT_URI=http://localhost:3000/callback
+
+-----------------------------------------------------------
+HOW TO USE THE SCRIPT
+
+1. Open the terminal 
+  The server will run on port 3001 by default.
+  Start the server with:
+  node index.js
+  The terminal should say: "Server running on http://localhost:${port}" port defaults to 3001, but could be another if changed
+
+2. Next we have to login to our account and authorize which fitbit account we will get data from
+  Open your web browser and navigate to:
+  http://localhost:3001/auth
+  This will redirect you to Fitbit's authorization page. Log in with your Fitbit account and authorize the application.
+
+3. Handle the Callback:
+After authorization, Fitbit will redirect you to:
+http://localhost:3000/callback
+The script will exchange the authorization code for an access token and store it.
+YOU DO NOT HAVE TO DO ANYTHING HERE
+The screen should (hopefully) say: "Authorization successful! You can now retrieve sleep data."
+
+4. Retrieve Sleep Data
+To fetch and download sleep data, if the authentication was succesful, go to:
+http://localhost:3001/get-sleep-data
+This will generate a CSV file with sleep data and prompt a download.
